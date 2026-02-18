@@ -4,6 +4,7 @@ title: projects
 permalink: /projects/
 nav: true
 nav_order: 4
+hide_title: true
 display_categories: ["3D Vision"]
 ---
 

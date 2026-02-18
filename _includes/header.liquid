@@ -3,7 +3,7 @@
   <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
     <div class="container">
       <a class="navbar-brand title" href="{{ site.baseurl }}/">
-        {% if site.title == 'blank' %}
+        {% if site.title == 'blank' or site.title == nil or site.title == '' %}
           {% if site.first_name %}
             <span class="site-name-first">{{- site.first_name -}}</span>
           {% endif %}
