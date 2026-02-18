@@ -12,6 +12,7 @@
   --global-text-color-light: #{v.$grey-color};
   --global-theme-color: #{v.$link-color};
   --global-hover-color: #{v.$link-color};
+  --global-link-hover-color: #{v.$link-color-hover};
   --global-font-family: #{v.$font-family-sans-serif};
   --global-hover-text-color: #{v.$white-color};
   --global-footer-bg-color: #{v.$grey-color-dark};
@@ -83,6 +84,7 @@ html[data-theme="dark"] {
   --global-text-color-light: #{v.$grey-color};
   --global-theme-color: #{v.$grey-color-light};
   --global-hover-color: #{v.$white-color};
+  --global-link-hover-color: #{v.$white-color};
   --global-font-family: #{v.$font-family-sans-serif};
   --global-hover-text-color: #{v.$white-color};
   --global-footer-bg-color: #{v.$grey-color-light};

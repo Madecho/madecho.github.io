@@ -59,21 +59,31 @@
     color: var(--global-text-color);
   }
 
-  .navbar-nav .nav-item .nav-link {
+  .navbar-brand.social a i::before,
+  .navbar-brand.social a svg {
     color: var(--global-text-color);
+  }
+
+  .navbar-brand.social a:hover i::before,
+  .navbar-brand.social a:hover svg {
+    color: var(--global-theme-color);
+  }
+
+  .navbar-nav .nav-item .nav-link {
+    color: var(--global-text-color-light);
 
     &:hover {
-      color: var(--global-hover-color);
+      color: var(--global-text-color);
     }
   }
 
   .navbar-nav .nav-item.active > .nav-link {
     background-color: inherit;
     font-weight: bolder;
-    color: var(--global-theme-color);
+    color: var(--global-text-color);
 
     &:hover {
-      color: var(--global-hover-color);
+      color: var(--global-text-color);
     }
   }
 
