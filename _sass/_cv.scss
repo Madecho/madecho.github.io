@@ -1,4 +1,60 @@
 /*****************************
+ * CV PDF-only (no structured data)
+ *****************************/
+
+.cv-pdf-only {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.cv-pdf-download {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 3rem;
+  color: var(--global-text-color);
+  border: 2px solid var(--global-text-color);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+    text-decoration: none;
+  }
+}
+
+.cv-pdf-icon {
+  font-size: 2.5rem;
+  opacity: 0.9;
+}
+
+.cv-pdf-label {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.cv-pdf-format {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+.cv-pdf-hint {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+/*****************************
  * CV shared styles
  *****************************/
 

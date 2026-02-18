@@ -18,18 +18,23 @@ layout: default
     <h1 class="post-title">
       {{ page.title }}
       {% if page.cv_pdf %}
-        <a
-          {% if page.cv_pdf contains '://' %}
-            href="{{ page.cv_pdf }}"
-          {% else %}
-            href="{{ page.cv_pdf | relative_url }}"
-          {% endif %}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="float-right"
-        >
-          <i class="fa-solid fa-file-pdf"></i>
-        </a>
+        {% assign has_cv_content = false %}
+        {% if site.data.cv and site.data.cv.cv %}{% assign has_cv_content = true %}{% endif %}
+        {% if site.data.resume %}{% assign has_cv_content = true %}{% endif %}
+        {% if has_cv_content %}
+          <a
+            {% if page.cv_pdf contains '://' %}
+              href="{{ page.cv_pdf }}"
+            {% else %}
+              href="{{ page.cv_pdf | relative_url }}"
+            {% endif %}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="float-right"
+          >
+            <i class="fa-solid fa-file-pdf"></i>
+          </a>
+        {% endif %}
       {% endif %}
     </h1>
     {% if page.description %}
@@ -385,7 +390,27 @@ layout: default
         {% endif %}
 
       {% else %}
-        <p>No CV data found. Please configure either RenderCV (cv.yml) or JSONResume (resume.json) data.</p>
+        {% if page.cv_pdf %}
+          {% assign cv_pdf_url = page.cv_pdf %}
+          {% unless page.cv_pdf contains '://' %}
+            {% assign cv_pdf_url = page.cv_pdf | relative_url %}
+          {% endunless %}
+          <div class="cv-pdf-only">
+            <a
+              href="{{ cv_pdf_url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cv-pdf-download"
+            >
+              <span class="cv-pdf-icon"><i class="fa-solid fa-file-pdf"></i></span>
+              <span class="cv-pdf-label">Download CV</span>
+              <span class="cv-pdf-format">PDF</span>
+            </a>
+            <p class="cv-pdf-hint">Click to view or download my curriculum vitae.</p>
+          </div>
+        {% else %}
+          <p>No CV data found. Please configure either RenderCV (cv.yml) or JSONResume (resume.json) data, or add a <code>cv_pdf</code> link in the page frontmatter.</p>
+        {% endif %}
       {% endif %}
     </div>
   </article>

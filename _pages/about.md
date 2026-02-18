@@ -2,12 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: <a href='mailto:madecho97@gmail.com'>Email:madecho97 [AT] gmail dot com</a>
 
 profile:
   align: right
   image: me.jpg
   image_circular: false # crops the image to make it circular
+  image_square: true # display image as square aspect ratio
   more_info: >
     <p>Department of Software Engineering</p>
     <p>Jiangxi University of Software Professional Technology</p>
@@ -22,13 +23,11 @@ announcements:
   limit: 5 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
-  enabled: true
+  enabled: false
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](https://www.reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I am currently a Lecturer at [Jiangxi University of Software Professional Technology](https://www.jxuspt.com/). Previously, I obtained my Master's degree in Computer Science from [Nanchang University](http://www.ncu.edu.cn/), where I was advised by [Prof. Jingbo Wei](https://teacher.ncu.edu.cn/publish/wjb/index.html). I hold a Bachelor's degree in Software Engineering from [Jiangxi University of Finance and Economics](http://www.jxufe.edu.cn/).
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
-
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+My research interests lie at the intersection of **3D Vision** and **AI**, specifically focusing on **3D Reconstruction**, **Point-Cloud Processing**, and **Generative AI**.

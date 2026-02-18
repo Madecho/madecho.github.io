@@ -5,8 +5,7 @@ layout: default
   <header class="post-header">
     <h1 class="post-title">
       {% if site.title == 'blank' %}
-        <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
-        {{ site.last_name }}
+        <span class="site-name-first">{{ site.first_name }}</span><span class="site-name-rest">{% if site.middle_name %} {{ site.middle_name }}{% endif %}{% if site.last_name %} {{ site.last_name }}{% endif %}</span>
       {% else %}
         {{ site.title }}
       {% endif %}

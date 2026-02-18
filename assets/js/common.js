@@ -17,6 +17,9 @@ $(document).ready(function () {
   });
   $("a").removeClass("waves-effect waves-light");
 
+  // remove tooltips from social/contact icons for a cleaner look
+  $(".contact-icons a").removeAttr("title");
+
   // bootstrap-toc
   if ($("#toc-sidebar").length) {
     // remove related publications years from the TOC

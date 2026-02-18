@@ -1,5 +1,8 @@
 FROM ruby:slim
 
+# Add build argument for environment
+ARG JEKYLL_ENV=development
+
 # uncomment these if you are having this issue with the build:
 # /usr/local/bundle/gems/jekyll-4.3.4/lib/jekyll/site.rb:509:in `initialize': Permission denied @ rb_sysopen - /srv/jekyll/.jekyll-cache/.gitignore (Errno::EACCES)
 # ARG GROUPID=901
@@ -34,6 +37,9 @@ RUN apt-get update -y && \
         zlib1g-dev && \
     pip --no-cache-dir install --upgrade --break-system-packages nbconvert
 
+# Set inotify limits for file watching
+RUN echo "fs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
+
 # clean up
 RUN apt-get clean && \
     apt-get autoremove && \
@@ -45,7 +51,7 @@ RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
 
 # set environment variables
 ENV EXECJS_RUNTIME=Node \
-    JEKYLL_ENV=production \
+    JEKYLL_ENV=${JEKYLL_ENV} \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8

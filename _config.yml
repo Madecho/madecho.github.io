@@ -2,23 +2,19 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: blank # the website title (if blank, full name will be used instead)
-first_name: You
-middle_name: R.
-last_name: Name
-contact_note: >
-  You can even add a little note about which of these is the best way to reach you.
+title: Zeyun Wan # the website title (if blank, full name will be used instead)
+first_name: Zeyun
+middle_name:
+last_name: Wan
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 footer_text: >
-  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
-  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
-  Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
-keywords: jekyll, jekyll-theme, academic-website, portfolio-website # add your own keywords or leave empty
+  
+keywords:  # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: decho.jpg # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
-url: https://madecho.github.io # the base hostname & protocol for your site
+url: https://zeyun.github.io # the base hostname & protocol for your site
 baseurl:  # the subpath of your site, e.g. /blog/. Leave blank for root
 last_updated: false # set to true if you want to display last updated in the footer
 impressum_path: # set to path to include impressum link in the footer, use the same path as permalink in a page, helps to conform with EU GDPR
@@ -55,9 +51,7 @@ external_services:
 
 navbar_fixed: true
 footer_fixed: true
-search_enabled: true
-socials_in_search: true
-posts_in_search: true
+search_enabled: false
 bib_search: true
 
 # Dimensions
@@ -154,9 +148,9 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 collections:
-  projects:
+  news:
     output: true
-  teachings:
+  projects:
     output: true
 
 # -----------------------------------------------------------------------------
@@ -180,6 +174,9 @@ kramdown:
 include: ["_pages", "_scripts"]
 exclude:
   - bin/
+  - _news/announcement_1.md
+  - _news/announcement_2.md
+  - _news/announcement_3.md
   - CONTRIBUTING.md
   - CUSTOMIZE.md
   - Dockerfile
@@ -240,7 +237,7 @@ sass:
 
 jekyll-minifier:
   compress_javascript: false # set to false since we are using terser as the js minifier
-  exclude: ["robots.txt", "assets/js/search/*.js"]
+  exclude: ["robots.txt"]
 
 # -----------------------------------------------------------------------------
 # Terser
@@ -399,7 +396,7 @@ enable_tooltips: false # enables automatic tooltip links generated for each sect
 enable_darkmode: true # enables switching between light/dark modes
 enable_navbar_social: false # enables displaying social links in the navbar on the about page
 enable_project_categories: true # enables categorization of projects into multiple categories
-enable_medium_zoom: true # enables image zoom feature (as on medium.com)
+enable_medium_zoom: false # zoom feature disabled; publication preview images are not clickable
 enable_progressbar: true # enables a horizontal progress bar linked to the vertical scroll position
 enable_video_embedding: false # enables video embedding for bibtex entries. If false, the button opens the video link in a new window.
 
@@ -644,9 +641,7 @@ third_party_libraries:
 # Get external JSON data
 # -----------------------------------------------------------------------------
 
-jekyll_get_json:
-  - data: resume
-    json: assets/json/resume.json # it can also be an url
+jekyll_get_json: []
 
 jsonresume:
   - basics

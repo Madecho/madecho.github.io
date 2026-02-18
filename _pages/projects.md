@@ -2,7 +2,9 @@
 layout: page
 title: projects
 permalink: /projects/
-nav: false
+nav: true
+nav_order: 4
+display_categories: ["3D Vision"]
 ---
 
 <!-- pages/projects.md -->
