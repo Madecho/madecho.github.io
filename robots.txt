@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://madecho.github.io/sitemap.xml
+Sitemap: https://zeyun.github.io/sitemap.xml
