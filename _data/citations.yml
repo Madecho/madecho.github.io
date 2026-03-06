@@ -1,8 +1,8 @@
 metadata:
-  last_updated: '2026-02-20'
+  last_updated: '2026-03-06'
 papers:
   VAqwrUoAAAAJ:d1gkVwhDpl0C:
-    citations: 0
+    citations: 1
     title: ShapeGPT and PointPainter for fast zero shot text-to-3d point cloud generation
     year: '2025'
   VAqwrUoAAAAJ:u-x6o8ySG0sC:
