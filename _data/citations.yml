@@ -1,12 +1,12 @@
 metadata:
-  last_updated: '2026-04-22'
+  last_updated: '2026-05-01'
 papers:
   VAqwrUoAAAAJ:d1gkVwhDpl0C:
     citations: 1
     title: ShapeGPT and PointPainter for fast zero shot text-to-3d point cloud generation
     year: '2025'
   VAqwrUoAAAAJ:u-x6o8ySG0sC:
-    citations: 37
+    citations: 38
     title: 'GLORN: Strong generalization fully convolutional network for low-overlap point cloud registration'
     year: '2022'
   VAqwrUoAAAAJ:u5HHmVD_uO8C:
