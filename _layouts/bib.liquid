@@ -84,10 +84,10 @@
           {%- if forloop.last and author_array_limit == author_array_size %}and {% endif -%}
         {% endif %}
         {%- if author_is_self -%}
-          <em>
+          <b>
             {{- author.first }}
             {{ author_last_html -}}
-          </em>
+          </b>
         {%- else -%}
           {%- if coauthor_url -%}
             <a href="{{ coauthor_url }}">
@@ -188,6 +188,10 @@
 
     <!-- Links/Buttons -->
     <div class="links">
+      {% if entry.paper %}
+        <a href="{{ entry.paper }}" target="_blank" rel="noopener">[Paper]</a>
+        &nbsp;&nbsp;
+      {% endif %}
       {% if entry.award %}
         <a class="award btn btn-sm z-depth-0" role="button">
           {%- if entry.award_name %}{{ entry.award_name }}{% else %}Awarded{% endif -%}
