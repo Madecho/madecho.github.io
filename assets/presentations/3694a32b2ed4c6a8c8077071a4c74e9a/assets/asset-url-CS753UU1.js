@@ -1,0 +1,1 @@
+var e=e=>`/assets/presentations/3694a32b2ed4c6a8c8077071a4c74e9a/${e.replace(/^\//,``)}`;export{e as t};
