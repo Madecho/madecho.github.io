@@ -7,7 +7,6 @@ on:
       - main
     paths:
       - ".github/static-decks/**"
-      - ".github/static-knot-study/**"
       - "assets/**"
       - "_sass/**"
       - "_scripts/**"
@@ -38,7 +37,6 @@ on:
       - main
     paths:
       - ".github/static-decks/**"
-      - ".github/static-knot-study/**"
       - "assets/**"
       - "_sass/**"
       - "_scripts/**"
@@ -108,10 +106,6 @@ jobs:
           echo "47fd2a49d25cf39779435ef87ce9ca49772a7db2a6e1eb314440fd507280a76a  .github/static-decks/interview-static.tar.gz" | sha256sum --check
           mkdir -p _site/assets/presentations/3694a32b2ed4c6a8c8077071a4c74e9a
           tar -xzf .github/static-decks/interview-static.tar.gz -C _site/assets/presentations/3694a32b2ed4c6a8c8077071a4c74e9a
-      - name: Add model recognition study
-        run: |
-          mkdir -p _site/knot-study
-          cp -R .github/static-knot-study/. _site/knot-study/
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
