@@ -71,7 +71,7 @@ function message(title, body, button) {
   document.querySelector("#reload")?.addEventListener("click", () => location.reload());
 }
 function login() {
-  app.innerHTML = `<main class="welcome"><p class="eyebrow">模型识别评价</p><h1>欢迎参加。</h1><p class="intro">请打开老师发给你的个人邀请链接。每人使用一个链接，可中途退出后继续。</p><div class="box"><h2>已有邀请链接？</h2><label for="invite">将个人邀请链接粘贴在这里</label><input class="input" id="invite" autocomplete="off" placeholder="粘贴完整链接"><button class="btn primary wide" id="enter">进入评价</button><p id="entry-error" class="muted"></p></div><p class="smallprint">本次评价仅记录匿名编号、角色选择和操作时间。</p></main>`;
+  app.innerHTML = `<main class="welcome"><p class="eyebrow">模型识别评价</p><h1>欢迎参加。</h1><p class="intro">请使用你的个人邀请链接。每人使用一个链接，可中途退出后继续。</p><div class="box"><h2>已有邀请链接？</h2><label for="invite">将个人邀请链接粘贴在这里</label><input class="input" id="invite" autocomplete="off" placeholder="粘贴完整链接"><button class="btn primary wide" id="enter">进入评价</button><p id="entry-error" class="muted"></p></div><p class="smallprint">本次评价会保存参与编号、你填写的姓名或昵称、角色选择和操作时间。无需填写真实姓名。</p></main>`;
   document.querySelector("#enter").onclick = () => {
     const value = document.querySelector("#invite").value.trim();
     let t = value;
@@ -79,13 +79,41 @@ function login() {
       t = new URLSearchParams(new URL(value).hash.slice(1)).get("invite") || "";
     } catch {}
     if (!/^(R0[1-9]|R10|T0[1-3])\.[a-f0-9]{64}$/.test(t)) {
-      document.querySelector("#entry-error").textContent = "请粘贴老师发送的完整个人邀请链接。";
+      document.querySelector("#entry-error").textContent = "请粘贴完整的个人邀请链接。";
       return;
     }
     token = t;
     write("knot24-invite", t);
     location.hash = "invite=" + t;
     boot();
+  };
+}
+function identify() {
+  dispose();
+  app.innerHTML = `<main class="welcome"><p class="eyebrow">模型识别评价 · ${escape(state.participant)}${state.mode === "test" ? " · 测试答卷" : ""}</p><h1>怎么称呼你？</h1><p class="intro">填写姓名或昵称，方便对应本次答卷。可以使用昵称，无需填写真实姓名。</p><form id="name-form" class="box"><label for="display-name">姓名或昵称</label><input class="input" id="display-name" autocomplete="off" maxlength="80" required value="${escape(state.displayName || read(key() + ":name-draft", ""))}" placeholder="请输入姓名或昵称"><p class="muted">1–40个字符。同一链接续答时会保留。</p><p id="name-error" class="notice error" hidden></p><button class="btn primary wide" type="submit">保存并继续</button></form><p class="smallprint">姓名或昵称随答卷保存，仅你本人和有权访问评价数据的账号可查看。</p></main>`;
+  const input = document.querySelector("#display-name");
+  input.addEventListener("input", () => write(key() + ":name-draft", input.value));
+  document.querySelector("#name-form").onsubmit = async (event) => {
+    event.preventDefault();
+    const displayName = input.value.normalize("NFC").trim(),
+      err = document.querySelector("#name-error"),
+      button = document.querySelector("#name-form button");
+    if (!displayName || [...displayName].length > 40 || /[\p{Cc}\p{Cf}]/u.test(displayName)) {
+      err.hidden = false;
+      err.textContent = "请输入1–40个字符的姓名或昵称，请勿使用换行或控制字符。";
+      return;
+    }
+    button.disabled = true;
+    try {
+      state = await api("profile", { displayName });
+      persist();
+      write(key() + ":name-draft", displayName);
+      await boot();
+    } catch (e) {
+      err.hidden = false;
+      err.textContent = e.message;
+      button.disabled = false;
+    }
   };
 }
 function intro() {
@@ -97,7 +125,8 @@ function intro() {
     .map((x, i) => `<label class="check"><input type="checkbox" name="familiar" value="${i}">${x}</label>`)
     .join(
       ""
-    )}</div><label class="check" style="margin-top:20px"><input type="checkbox" id="fam-confirm">以上选择已确认（都不认识可以不勾选）</label></div><p id="intro-error" class="notice error" hidden></p><button id="start" class="btn primary wide">开始评价</button><p class="smallprint">答案按匿名编号保存，仅用于模型识别研究。可以随时退出，并用同一邀请链接继续。</p></main>`;
+    )}</div><label class="check" style="margin-top:20px"><input type="checkbox" id="fam-confirm">以上选择已确认（都不认识可以不勾选）</label></div><p>姓名或昵称：${escape(state.displayName)} <button class="btn link" id="edit-name">修改称呼</button></p><p id="intro-error" class="notice error" hidden></p><button id="start" class="btn primary wide">开始评价</button><p class="smallprint">答案与参与编号、姓名或昵称一同保存，仅用于本次研究。可以随时退出，并用同一邀请链接继续。</p></main>`;
+  document.querySelector("#edit-name").onclick = identify;
   document.querySelector("#start").onclick = async () => {
     const eligible = document.querySelector("input[name=eligible]:checked"),
       err = document.querySelector("#intro-error");
@@ -330,6 +359,10 @@ async function boot(resolveConflict = false) {
       return;
     }
   }
+  if (!state.displayName) {
+    identify();
+    return;
+  }
   if (state.completedAt) {
     pending = {};
     persist();
@@ -337,8 +370,7 @@ async function boot(resolveConflict = false) {
     return;
   }
   if (!state.startedAt) {
-    if (state.mode === "formal" && !state.formalOpen)
-      message("评价还未开放。", "老师正在确认手机微信中的加载和保存情况，请稍后用同一链接进入。", true);
+    if (state.mode === "formal" && !state.formalOpen) message("评价还未开放。", "正在确认手机微信中的加载和保存情况，请稍后用同一链接进入。", true);
     else intro();
     return;
   }
